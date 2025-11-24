@@ -1,4 +1,9 @@
 # DATA VISUALISATION PROJECT
+
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Dash](https://img.shields.io/badge/Dash-3EB489?style=for-the-badge&logo=plotly&logoColor=white)
+![Plotly](https://img.shields.io/badge/Plotly-2391D3?style=for-the-badge&logo=plotly&logoColor=white)
+
 ## Dataset presentation
 The dataset studied comes from an evaluation carried out by a panel of ESPN experts (found on Kaggle), composed sports scientists, academicians specialized in movement, professional athletes and experienced sports journalists. Their objective was to determine, among 60 disciplines sports, which require the highest physical and cognitive abilities.
 
@@ -67,7 +72,3 @@ The dashboard groups all the analyses carried out as part of the project.
 
 ## Authors 
 Matthieu Guigard -- Thomas Gagnieu -- Séverin Jorry
-
-![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Dash](https://img.shields.io/badge/Dash-3EB489?style=for-the-badge&logo=plotly&logoColor=white)
-![Plotly](https://img.shields.io/badge/Plotly-2391D3?style=for-the-badge&logo=plotly&logoColor=white)
