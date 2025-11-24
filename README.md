@@ -67,3 +67,7 @@ The dashboard groups all the analyses carried out as part of the project.
 
 ## Authors 
 Matthieu Guigard -- Thomas Gagnieu -- Séverin Jorry
+
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Dash](https://img.shields.io/badge/Dash-3EB489?style=for-the-badge&logo=plotly&logoColor=white)
+![Plotly](https://img.shields.io/badge/Plotly-2391D3?style=for-the-badge&logo=plotly&logoColor=white)
