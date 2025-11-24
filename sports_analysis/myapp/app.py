@@ -16,7 +16,7 @@ import ast
 import json
 import plotly.graph_objects as go
 
-# Variable globale pour suivre les colonnes indépendantes sélectionnées
+# Global variable to track selected independent columns
 selected_x_columns = []
 
 CLUSTER_COLORS = [
@@ -28,12 +28,13 @@ CLUSTER_COLORS = [
     "#8c564b",  # marron
 ]
 
-# --- Vérification et lecture du dataset ---
+# --- Verification and reading of the dataset ---
 DATA_PATH = "data/toughestsport.csv"
 df = pd.read_csv(DATA_PATH, sep=',')
 print(f"Dataset chargé : {df.shape[0]} lignes, {df.shape[1]} colonnes")
 
-# La première colonne contient le nom des sports
+
+# The first column contains the name of the sports
 sport_col = df.columns[0]
 numeric_cols = df.select_dtypes(include='number').columns.tolist()
 if len(numeric_cols) < 2:
@@ -42,20 +43,24 @@ numeric_cols.remove("Rank")
 numeric_cols.remove("Total")
 
 
-# --- Génération du profil Ydata ---
+# --- Ydata generation profile ---
 profile = ProfileReport(df, title="Toughest Sport Analysis", explorative=True)
 profile.to_file("report.html")  # Ydata report
 
-# --- Vérification existence du rapport manuel ---
+
+
+# --- Existence check of manual report ---
 if not os.path.exists("rapport.html"):
     with open("rapport.html", "w") as f:
         f.write("<h1>Rapport manuel</h1><p>Contenu de test ici</p>")
 
-# --- Initialisation Dash ---
+
+# --- Dash initialization ---
 app = Dash(__name__, suppress_callback_exceptions=True)
 server = app.server
 
-# --- Routes Flask ---
+
+# --- Route Flask ---
 @server.route("/report")
 def serve_report():
     abs_path = os.path.abspath("report.html")
@@ -70,9 +75,10 @@ def serve_rapport():
     filename = os.path.basename(abs_path)
     return send_from_directory(directory, filename)
 
-# --- Page principale ---
+
+# --- Main page ---
 home_layout = html.Div([
-    html.Div("Projet AD : JORRY - GAGNIEU - GUIGARD", className="top-bar"),
+    html.Div("DATA VISUALISATION PROJECT", className="top-bar"),
 
     html.Div([
     html.A("Global visualisation with Ydata", href="/report",
@@ -95,7 +101,7 @@ home_layout = html.Div([
            className="menu-button",
            style={"--rgb-color": "255,150,0", "--border-color": "#8a4a00"}),
 
-    html.A("Rapport", href="/rapport",
+    html.A("Report", href="/rapport",
            className="menu-button",
            style={"--rgb-color": "255,70,170", "--border-color": "#8c0055"}),
     ], className="button-grid")
@@ -103,13 +109,13 @@ home_layout = html.Div([
 
 
 
-# --- Layout PCA page dédiée ---
+# --- Layout PCA dedicated page ---
 pca_layout_page = html.Div([
-    html.H2("Analyse en Composantes Principales (PCA)"),
+    html.H2("Principal Component Analysis (PCA)"),
 
     dcc.Checklist(
         id="pca-label-toggle",
-        options=[{"label": "Afficher les noms des sports sur les points", "value": "show"}],
+        options=[{"label": "Display sports names on the dots", "value": "show"}],
         value=["show"],  # par défaut : COMME AVANT → labels affichés
         style={"margin-bottom": "20px"}
     ),
@@ -128,14 +134,14 @@ pca_layout_page = html.Div([
 
 # --- Layout Clusters ---
 clusters_layout = html.Div([
-    html.H2("Analyse des clusters"),
-    html.P("Choisissez les variables à analyser :"),
+    html.H2("Cluster analysis"),
+    html.P("Choose the variables to be analyzed:"),
     html.Div([
         html.Button(col, id={"type": "col-button", "index": col}, n_clicks=0)
         for col in numeric_cols
     ], style={"display": "flex", "flex-wrap": "wrap", "gap": "5px"}),
     html.Br(),
-    html.Label("Nombre de clusters :"),
+    html.Label("Number of clusters:"),
     dcc.Dropdown(
         id="n-clusters-dropdown",
         options=[{"label": str(i), "value": i} for i in range(2, 7)],
@@ -144,7 +150,7 @@ clusters_layout = html.Div([
     html.Br(),
     dcc.Graph(id="cluster-graph"),
 
-    # ⭐ Ici on affichera le silhouette plot Yellowbrick sous forme d'image
+    # Here we will display the silhouette plot Yellowbrick in the form of an image
     html.Img(
         id="silhouette-plot",
         style={"maxWidth": "800px", "width": "100%", "marginTop": "30px"}
@@ -152,17 +158,17 @@ clusters_layout = html.Div([
 ])
 
 
-# --- Layout Régression Linéaire ---
+# --- Linear Regression Layout ---
 linear_regression_layout = html.Div([
-    html.H2("Régression Linéaire"),
-    html.P("Choisissez une variable dépendante (Y) :"),
+    html.H2("Linear regression"),
+    html.P("Choose a dependent variable (Y) :"),
     dcc.Dropdown(
         id="y-variable-dropdown",
         options=[{"label": col, "value": col} for col in numeric_cols],
         value=numeric_cols[0]
     ),
     html.Br(),
-    html.P("Choisissez les variables indépendantes (X) :"),
+    html.P("Choose the independent variables (X) :"),
     html.Div([
         html.Button(col, id={"type": "x-col-button", "index": col}, n_clicks=0)
         for col in numeric_cols
@@ -171,18 +177,21 @@ linear_regression_layout = html.Div([
     dcc.Graph(id="linear-regression-graph")
 ])
 
+
 # --- Layout Correlation ---
 correlation_layout = html.Div([
-    html.H2("Analyse des Corrélations"),
-    html.P("Heatmap des corrélations entre toutes les colonnes numériques."),
+    html.H2("Correlation analysis"),
+    html.P("Heatmap of correlations between all the numerical columns."),
     dcc.Graph(id="correlation-graph")
 ])
 
-# --- Layout racine multipage ---
+
+# --- Layout root multipage ---
 app.layout = html.Div([
     dcc.Location(id="url", refresh=False),
     html.Div(id="page-content")
 ])
+
 
 # --- Callback multi-page ---
 @app.callback(
@@ -202,6 +211,7 @@ def display_page(pathname):
         return home_layout
     else:
         return html.H1("404 - Page not found")
+
 
 # --- Callback PCA ---
 # @app.callback(
@@ -228,12 +238,12 @@ def update_pca_page(label_options):
     pca = PCA(n_components=2)
     components = pca.fit_transform(df[numeric_cols])
 
-    # Variance expliquée (PC1, PC2)
+    # Variance explained (PC1, PC2)
     explained = pca.explained_variance_ratio_ * 100
     pc1_var = explained[0]
     pc2_var = explained[1]
 
-    # Contributions des variables aux axes
+    # Contributions of variables to axes
     loadings = pd.DataFrame(pca.components_.T, index=numeric_cols, columns=["PC1", "PC2"])
 
     top_PC1 = ", ".join(loadings["PC1"].abs().sort_values(ascending=False).head(3).index)
@@ -243,11 +253,12 @@ def update_pca_page(label_options):
     pca_df = pd.DataFrame(components, columns=["PC1", "PC2"])
     pca_df[sport_col] = df[sport_col]
 
-    # Titres des axes : variance + variables dominantes
+    # Axis titles: variance + dominant variables
     axis_titles = {
         "x": f"PC1 ({pc1_var:.1f}% – {top_PC1})",
         "y": f"PC2 ({pc2_var:.1f}% – {top_PC2})",
     }
+
 
     # FIGURE
     if show_labels:
@@ -268,7 +279,8 @@ def update_pca_page(label_options):
             hover_name=sport_col,
         )
 
-    # ➜ MET À JOUR LES TITRES D’AXES (obligatoire)
+
+    # UPDATE THE AXIS TITLES (mandatory)
     fig.update_layout(
         xaxis_title=axis_titles["x"],
         yaxis_title=axis_titles["y"]
@@ -277,29 +289,25 @@ def update_pca_page(label_options):
     return fig
 
 def make_silhouette_image(X, n_clusters):
-    """
-    X : np.array de shape (n_samples, n_features) après normalisation
-    n_clusters : nombre de clusters K
-    Retourne une string 'data:image/png;base64,...' utilisable dans html.Img(src=...)
-    """
-    # On recrée un modèle KMeans identique à celui du scatter
+
+    # We recreate a KMeans model identical to that of the scatter
     model = KMeans(n_clusters=n_clusters, random_state=0)
 
-    # SilhouetteVisualizer va gérer le fit et le calcul des scores
+    # SilhouetteVisualizer will manage the fit and calculate the scores
     visualizer = SilhouetteVisualizer(
     model,
-    colors=CLUSTER_COLORS[:n_clusters]  # même ordre que Plotly
+    colors=CLUSTER_COLORS[:n_clusters]  # same order as Plotly
     )
     visualizer.fit(X)
 
-    # On sauvegarde la figure matplotlib dans un buffer mémoire
+    # We save the matplotlib figure in a memory buffer
     buf = io.BytesIO()
     visualizer.ax.figure.tight_layout()
     visualizer.ax.figure.savefig(buf, format="png", bbox_inches="tight")
-    plt.close(visualizer.ax.figure)  # on ferme la figure pour éviter les fuites mémoire
+    plt.close(visualizer.ax.figure)  # we close the figure to avoid memory leaks
     buf.seek(0)
 
-    # On encode en base64 pour l'envoyer à Dash
+    # We encode in base64 to send it to Dash
     encoded = base64.b64encode(buf.getvalue()).decode("utf-8")
     return "data:image/png;base64," + encoded
 
@@ -318,14 +326,13 @@ def update_clusters(n_clicks_list, n_clusters):
     ctx = dash.callback_context
     global selected_columns
 
-    # aucun événement encore
+    # no event yet
     if not ctx.triggered:
-        fig = px.scatter(title="Cliquez sur deux variables à analyser")
+        fig = px.scatter(title="Click on two variables to analyze")
         return fig, None
 
     trigger_id = ctx.triggered[0]['prop_id'].split('.')[0]
 
-    # 🔹 Si c'est un bouton dynamique (ID sous forme de dict JSON)
     if trigger_id.startswith("{"):
         trigger_dict = ast.literal_eval(trigger_id)
         button_index = trigger_dict.get("index")
@@ -333,17 +340,17 @@ def update_clusters(n_clicks_list, n_clusters):
         if button_index not in selected_columns:
             selected_columns.append(button_index)
 
-        # on garde au max les 2 dernières colonnes
+        # we keep the last 2 columns to a maximum
         if len(selected_columns) > 2:
             selected_columns = selected_columns[-2:]
-
-    # Si c'est le dropdown qui a déclenché, on NE change PAS selected_columns
+    # If it’s the dropdown that triggered, we DO NOT change selected_columns
 
     if len(selected_columns) < 2:
-        fig = px.scatter(title="Sélectionnez deux variables pour le clustering")
+        fig = px.scatter(title="Select two variables for clustering")
         return fig, None
 
-    # Normalisation + KMeans comme avant
+
+    # Standardization + KMeans as before
     df_normalized = df.copy()
     scaler = StandardScaler()
     df_normalized[selected_columns] = scaler.fit_transform(
@@ -354,28 +361,26 @@ def update_clusters(n_clicks_list, n_clusters):
         random_state=0
     ).fit_predict(df_normalized[selected_columns])
 
-    # labels numériques (pour calcul / silhouette)
+    # digital labels (for calculation / silhouette)
     df_normalized["cluster"] = clusters_normalized
-    # labels texte (pour Plotly → couleurs discrètes)
+    # text labels (for Plotly discrete colors)
     df_normalized["cluster_label"] = df_normalized["cluster"].astype(str)
 
-    # Figure plotly de clustering avec palette DISCRÈTE
+    # Clustering plotly figure with DISCRETE palette
     fig = px.scatter(
         df_normalized,
         x=selected_columns[0],
         y=selected_columns[1],
-        color="cluster_label",  # <- on colore avec la version str
+        color="cluster_label", 
         hover_name=sport_col,
         title=f"Clustering ({n_clusters} clusters) sur "
               f"{selected_columns[0]} vs {selected_columns[1]}",
         color_discrete_sequence=CLUSTER_COLORS[:n_clusters],
         category_orders={"cluster_label": [str(i) for i in range(n_clusters)]}
     )
-
-    # (optionnel, pour que la légende soit jolie)
     fig.update_layout(legend_title_text="Cluster")
 
-    # 👉 Silhouette plot Yellowbrick -> image base64
+    # Silhouette plot Yellowbrick -> image base64
     X_for_sil = df_normalized[selected_columns].values
     silhouette_src = make_silhouette_image(X_for_sil, n_clusters)
 
@@ -384,7 +389,7 @@ def update_clusters(n_clicks_list, n_clusters):
 
 
 
-# --- Callback Régression Linéaire ---
+# --- Callback Linear Regression ---
 @app.callback(
     Output("linear-regression-graph", "figure"),
     Input({"type": "x-col-button", "index": ALL}, "n_clicks"),
@@ -396,29 +401,29 @@ def update_linear_regression(n_clicks_list, y_col):
 
     if not ctx.triggered or y_col is None:
         return go.Figure().update_layout(
-            title="Sélectionnez une variable dépendante et au moins une variable indépendante"
+            title="Select a dependent variable and at least one independent variable"
         )
 
-    # Détecte quel élément a déclenché
+    # Detect which element triggered
     trigger_id = ctx.triggered[0]['prop_id'].split('.')[0]
 
-    # Si c'est un bouton dynamique
+    # If it’s a dynamic button
     if trigger_id.startswith("{"):
         button_index = json.loads(trigger_id)['index']
 
-        # Toggle sélection
+        # Toggle selection
         if button_index in selected_x_columns:
             selected_x_columns.remove(button_index)
         else:
             selected_x_columns.append(button_index)
 
-    # Si aucune variable indépendante sélectionnée
+    # If no independent variable selected
     if len(selected_x_columns) == 0:
         return go.Figure().update_layout(
-            title="Sélectionnez au moins une variable indépendante"
+            title="Select at least one independent variable"
         )
 
-    # Création figure
+    # Figure
     fig = go.Figure()
     for x_col in selected_x_columns:
         X = df[[x_col]]
@@ -435,9 +440,9 @@ def update_linear_regression(n_clicks_list, y_col):
         ))
 
     fig.update_layout(
-        title=f"Régression linéaire: {y_col} vs {', '.join(selected_x_columns)}",
-        xaxis_title="Variable indépendante",
-        yaxis_title=y_col
+        title=f"Linear regression: {y_col} vs {', '.join(selected_x_columns)}",
+        xaxis_title=f"Independent variable : {x_col}",
+        yaxis_title=f"dependant Variable : {y_col}"
     )
 
     return fig
@@ -455,7 +460,7 @@ def update_correlation(_):
         corr_matrix,
         text_auto=True,
         labels=dict(x="Variable", y="Variable", color="Corrélation"),
-        title="Matrice de corrélation"
+        title="Correlation matrix"
     )
 
     fig.update_layout(

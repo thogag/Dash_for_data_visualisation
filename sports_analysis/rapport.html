@@ -32,135 +32,134 @@
   <main class="content">
 
     <header class="main-header">
-      <h1>Analyse de la difficulté des sports à partir de données ESPN</h1>
+      <h1>Analysis of the difficulty of sports from ESPN data</h1>
       <p class="subtitle">
         Régression linéaire &middot; ACP &middot; Corrélations &middot; Clustering
       </p>
       <div class="tags">
-        <span class="tag">Dataset ESPN</span>
+        <span class="tag">ESPN Dataset</span>
         <span class="tag">60 sports</span>
-        <span class="tag">10 compétences athlétiques</span>
+        <span class="tag">10 athletic skills</span>
       </div>
     </header>
 
     
-    <!-- Présentation -->
-    <section id="presentation" class="card">
-      <h2>Présentation du jeu de données</h2>
-      <p>Le jeu de données étudié provient d’une évaluation réalisée par un panel d’experts d’ESPN, composé 
-        de scientifiques du sport, d’académiciens spécialisés dans le mouvement, d’athlètes professionnels 
-        et de journalistes sportifs expérimentés. Leur objectif était de déterminer, parmi 60 disciplines 
-        sportives, lesquelles requièrent les capacités physiques et cognitives les plus élevées.
+    <!-- Presentation -->
+    <section id="Dataset presentation" class="card">
+      <h2>Presentation of the dataset</h2>
+      <p>
+        The dataset studied comes from an evaluation carried out by a panel of ESPN experts, composed 
+        sports scientists, academicians specialized in movement, professional athletes 
+        and experienced sports journalists. Their objective was to determine, among 60 disciplines 
+        sports, which require the highest physical and cognitive abilities.
       </p>
 
       <p class="pill-inline">Les 10 compétences athlétiques étudiées</p>
 
       <div class="skills-grid">
-        <div class="skill-item"><div class="skill-name">Endurance</div><div class="skill-desc">Effort sur la durée</div></div>
-        <div class="skill-item"><div class="skill-name">Strength</div><div class="skill-desc">Force physique</div></div>
-        <div class="skill-item"><div class="skill-name">Power</div><div class="skill-desc">Force explosive</div></div>
-        <div class="skill-item"><div class="skill-name">Speed</div><div class="skill-desc">Déplacement rapide</div></div>
-        <div class="skill-item"><div class="skill-name">Agility</div><div class="skill-desc">Changement de direction</div></div>
-        <div class="skill-item"><div class="skill-name">Flexibility</div><div class="skill-desc">Souplesse</div></div>
-        <div class="skill-item"><div class="skill-name">Nerve</div><div class="skill-desc">Gestion du risque</div></div>
-        <div class="skill-item"><div class="skill-name">Durability</div><div class="skill-desc">Résistance</div></div>
+        <div class="skill-item"><div class="skill-name">Endurance</div><div class="skill-desc">Effort over time</div></div>
+        <div class="skill-item"><div class="skill-name">Strength</div><div class="skill-desc">Physical strength</div></div>
+        <div class="skill-item"><div class="skill-name">Power</div><div class="skill-desc">Explosive power</div></div>
+        <div class="skill-item"><div class="skill-name">Speed</div><div class="skill-desc">Rapid movement</div></div>
+        <div class="skill-item"><div class="skill-name">Agility</div><div class="skill-desc">Change of direction</div></div>
+        <div class="skill-item"><div class="skill-name">Flexibility</div><div class="skill-desc">flexibility</div></div>
+        <div class="skill-item"><div class="skill-name">Nerve</div><div class="skill-desc">Grisk management</div></div>
+        <div class="skill-item"><div class="skill-name">Durability</div><div class="skill-desc">resistance</div></div>
         <div class="skill-item"><div class="skill-name">Hand–Eye Coordination</div><div class="skill-desc">Coordination</div></div>
-        <div class="skill-item"><div class="skill-name">Analytic Aptitude</div><div class="skill-desc">Stratégie</div></div>
+        <div class="skill-item"><div class="skill-name">Analytic Aptitude</div><div class="skill-desc">strategy</div></div>
       </div>
       <p>
-        Chaque compétence est évaluée sur une échelle de 1 à 10 permettant de classer les sports du plus exigeant au moins exigeant.
-        Par exemple, la boxe est identifiée comme le sport le plus difficile, tandis que la pêche figure parmi les sports les moins exigeants.
+        Each skill is assessed on a scale from 1 to 10 allowing the sports to be ranked from the most demanding to the least demanding.
+        For example, boxing is identified as the most difficult sport, while fishing is among the least demanding sports.
       </p>
 
     </section>
 
 
-    <!-- Choix du dataset -->
+    <!-- Dataset choice -->
     <section id="choix" class="card">
-      <h2>Pourquoi avons-nous choisi ce dataset ?</h2>
+      <h2>Why did we choose this dataset?</h2>
       <p>
-        Plusieurs raisons motivent le choix de ce dataset pour notre analyse :
+        Several reasons motivate the choice of this dataset for our analysis:
       </p>
 
       <ul class="bullets">
-        <li>Il offre un <strong>cadre multidimensionnel riche</strong>, avec dix variables quantitatives permettant d’examiner les sports sous plusieurs angles.</li>
-        <li>Les données sont <strong>structurées, fiables et faciles à manipuler</strong>.</li>
-        <li>Le thème est <strong>intuitif et pertinent</strong>, facilitant l’analyse et l’interprétation.</li>
-        <li>Il permet des <strong>analyses statistiques avancées</strong> : corrélation, ACP, clustering, régression.</li>
-        <li>Il soulève des questions intéressantes : existence de groupes naturels, importance relative des compétences.</li>
+        <li>It offers a <strong>rich multidimensional framework</strong>, with 10 quantitative variables allowing for examining sports from multiple angles.</li>
+        <li>The data is <strong>structured,reliable and easy to handle.</strong>.</li>
+        <li>The theme is <strong>intuitive et relevant</strong>, facilitating analysis and interpretation.</li>
+        <li>It allows <strong>advanced statistical analyses</strong> : correlation, ACP, clustering, regression.</li>
+        <li>It raises interesting questions: existence of natural groups, relative importance of skills.</li>
       </ul>
     </section>
 
 
-    <!-- Objectifs -->
+    <!-- Objectives -->
     <section id="objectifs" class="card">
-      <h2>Objectifs de l'analyse</h2>
+      <h2>Analysis objectives</h2>
       <p>
-        À travers ce dataset ESPN, notre objectif est de comprendre ce qui caractérise les aptitudes nécessaires pour un sport. Nous chercherons à déterminer si certaines compétences (physiques, techniques, mentales) sont plus déterminantes que d'autres dans l’évaluation globale, si les sports difficiles partagent des traits communs, et si l’on peut prédire la difficulté d’un sport à partir de ces compétences.
+        Through this ESPN dataset, our objective is to understand what characterizes the skills necessary for a sport. We will seek to determine whether certain skills (physical, technical, mental) are more determinant than others in the overall assessment, if difficult sports share common traits, and if one can predict the difficulty of a sport from these skills.
       </p>
       <ul class="bullets">
-        <li>Identifier les liens entre compétences → Corrélation</li>
-        <li>Réduire la dimension et visualiser → ACP</li>
-        <li>Regrouper les sports en fonction de paramètres spécifiques → Clustering</li>
-        <li>Expliquer et prédire les aptitudes "complémentaires" → Régression</li>
+        <li>Identify the links between skills Correlation</li>
+        <li>Reduce the dimension and visualize ACP</li>
+        <li>Group sports according to specific parameters Clustering</li>
+        <li>Explain and predict 'complementary' skills Regression</li>
       </ul>
     </section>
 
 
-    <!-- Corrélations -->
+    <!-- Correlations -->
     <section id="correlations" class="card">
-      <h2>Interprétation de la matrice de corrélation (dans l'onglet "correlation")</h2>
-      <p>La partie corrélation de notre dashboard présente une matrice de corrélation. 
-        Cette matrice utilise la corrélation de Pearson. Une méthode qui permet d'évaluer la relation linéaires entre deux variables. 
-        Dans notre cas, nous avons pu visualiser les dépendances entre les différentes caractéristiques physiques. Pour rappel, 
-        c'est un coefficient qui est calculé entre chaque paire de variable. 
+      <h2>Interpretation of the correlation matrix (in the "correlation" tab)</h2>
+      <p>The correlation part of our dashboard presents a correlation matrix. 
+        This matrix uses the Pearson correlation. A method that allows to evaluate the linear relationship between two variables. 
+        In our case, we were able to visualize the dependencies between the different physical characteristics. As a reminder, it is a coefficient that is calculated between each pair of variables. 
       </p>
         <ul class="bullets">
-          <li>Ce coefficient s'interprète très simplement : Pearson ∈ [-1, 1],</li>
-          <li>Proche de 0 = variables indépendantes</li>
-          <li>Poche de 1 = variable dépendante qui évolue ensemble</li>
-          <li>Proche de -1 = si la variable 1 augmente, alors la variable 2 diminue et vice-versa</li>
+          <li>This coefficient can be interpreted very simply : Pearson ∈ [-1, 1],</li>
+          <li>Close to 0 = independent variables</li>
+          <li>Pocket of 1 = dependent variable that evolves together</li>
+          <li>Close to -1 = if variable 1 increases, then variable 2 decreases and vice versa</li>
         </ul>
       <p>
-        Parmi les exemples de notre dataset. 
-        On a un coefficient proche de 0 (-0.02) entre l'aptitude analytique (stratégie) et la souplesse, ce qui est logique, 
-        en aucun cas la laxité du corps permet ou ne permet pas de prendre une bonne décision stratégique. 
-        A l'inverse, on a un coefficient proche de 1 (0.73) quand on compare cette même capacité analytique avec la coordination oeil-main. 
-        On peut ici théoriser qu'une bonne coordination oeil-main (captation des informations - réaction physique) permet une meilleure prise de décision 
-        dans le cadre sportif. On pourrait citer et expliquer des dizaines d'exemples, mais ce qui est important à retenir ici, 
-        c'est que quelqu'un qui souhaiterait identifier le sport qui est fait pour lui à l'aide de notre dashboard pourrait identifier, 
-        sur la base d'une seule de ses qualités physiques, connues celles qui ont de fortes probabilités d'être associées et au contraire, 
-        celle qui semblent indépendantes ou très peu liés.
+        Among the examples of our dataset. 
+        We have a coefficient close to 0 (-0.02) between analytical ability (strategy) and flexibility, which is logical, 
+        in no case does the laxity of the body allow or not allow for making a good strategic decision. 
+        Conversely, we have a coefficient close to 1 (0.73) when comparing this same analytical ability with eye-hand coordination. 
+        One can here theorize that good eye-hand coordination (capture of information - physical reaction) allows better decision-making. 
+        in the sporting context. We could cite and explain dozens of examples, but what is important to remember here, 
+        it’s that someone who would like to identify the sport that is made for them using our dashboard could identify, 
+        on the basis of only one of his physical qualities, known as those that have a high probability of being associated and on the contrary, 
+        the ones that seem independent or very little related.
       </p>
     </section>
 
 
     <!-- ACP -->
     <section id="acp" class="card">
-      <h2>Analyse en Composantes Principales (ACP)</h2>
+      <h2>Principal Components Analysis (PCA)</h2>
       <p>
-        L’Analyse en Composantes Principales (ACP) montre deux axes qui expliquent un peu plus de 
-        60 % de la variance du jeu de données.
+        The Principal Component Analysis (PCA) shows two axes that explain a little more of 60% of the variance of the dataset.
       </p>
       <ul class="bullets">
         <li>
-          <strong>Premier axe (PC1 – 41,8 %)</strong> : oppose les sports demandant des aptitudes 
-          physiques importantes (force, vitesse, endurance, etc.) à ceux nécessitant peu d’aptitudes 
-          physiques tels que la pêche, le billard ou le bowling.
+          <strong>First axis (PC1 - 41.8%)</strong> : opposes sports requiring skills 
+          important physical (strength, speed, endurance, etc.) to those requiring little skills 
+          physical such as fishing, billiards or bowling.
         </li>
         <li>
-          <strong>Deuxième axe (PC2 – 16,9 %)</strong> : sépare les sports reposant sur la coordination 
-          et la précision (tennis, badminton, tennis de table) de ceux reposant sur la gestion du 
-          risque, comme le rodéo, le ski jumping ou le diving.
+          <strong>Second axis (PC2 - 16.9%)</strong> : separates coordination-based sports 
+          and the precision (tennis, badminton, table tennis) of those relying on the management of the 
+          risk, like rodeo, ski jumping or diving.
         </li>
       </ul>
       <p>
-        L’ACP met ainsi en évidence que les deux groupes de caractéristiques qui expliquent le plus 
-        la variation de la difficulté d’un sport sont :
+        The CPA thus highlights that the two groups of characteristics that explain the most 
+        the variation in the difficulty of a sport are:
       </p>
       <ul class="bullets">
-        <li><strong>L’intensité physique</strong></li>
-        <li><strong>La précision / coordination</strong></li>
+        <li><strong>The physical intensity</strong></li>
+        <li><strong>Precision / coordination</strong></li>
       </ul>
     </section>
 
@@ -168,81 +167,80 @@
     <!-- Clustering -->
     <section id="clustering" class="card">
       <h2>Clustering (K-Means)</h2>
-      <p>Nous avons appliqué l’algorithme K-Means avec k=3, basé sur les 10 compétences normalisées. Voici 2 exemples d'interprétation</p><br>
+      <p>We applied the K-Means algorithm with k=3, based on the 10 normalized skills. Here are 2 examples of interpretation</p><br>
 
-      <h3>Clusterisation des sports en fonction de la résistance (Durability) et de la cooridnation oeil-main</h3>
+      <h3>Clusterization of sports based on resistance (Durability) and hand-eye coordination</h3>
       <ul class="bullets">
-        <li><strong>Un groupe endurant et coordonné (0) :</strong> Une bonne résistance et une coordination œil-main efficace, adapté à des tâches prolongées et précises.</li>
-        <li><strong>Un groupe coordonné mais peu résistant (1) :</strong> Excellente coordination œil-main, mais une durabilité réduite, ce qui peut limiter leur performance sur la durée.</li>
-        <li><strong>Un groupe peu performant (2) :</strong> Avec une coordination œil-main et une résistance faibles, nécessitant un renforcement dans ces deux domaines.</li>
+        <li><strong>A cohesive and coordinated group (0):</strong> Good endurance and effective hand-eye coordination, suitable for prolonged and precise tasks. </li>
+        <li><strong>A coordinated but weak group (1):</strong> Excellent eye-hand coordination, but reduced durability, which may limit their performance over time. </li>
+        <li><strong>A low-performing group (2):</strong> With weak hand-eye coordination and resistance, requiring reinforcement in these two areas. </li>
       </ul>
       <p>
-        L’analyse montre une <strong>ségmentation nette des individus</strong> en fonction de leur coordination œil-main et de leur durabilité, deux critères essentiels dans de nombreux domaines. 
-        Ces distinctions permettent d’<strong>identifier des besoins spécifiques</strong> pour chaque groupe, que ce soit pour améliorer l’endurance, la précision, ou les deux, et pourraient servir de base pour <strong>optimiser les performances</strong> ou <strong>répartir les tâches</strong> en fonction des aptitudes naturelles.
+        The analysis shows a <strong>net segmentation of individuals</strong> based on their hand-eye coordination and durability, two essential criteria in many areas. 
+        These distinctions allow to<strong>identify specific</strong> needs for each group, whether to improve endurance, precision, or both, and could serve as a basis for <strong>optimizing performance</strong> or <strong>distributing tasks</strong> based on natural abilities.
       </p><br>
 
-      <h3>Clusterisation des sports en fonction de l'agilité et de la force</h3>
+      <h3>Clusterization of sports based on agility and strength</h3>
       <ul class="bullets">
-        <li><strong>Un groupe performant (0) :</strong> Alliant force et agilité, idéal pour des activités exigeant ces deux qualités.</li>
-        <li><strong>Un groupe déséquilibré (1) :</strong> Présentant une force correcte, mais une agilité limitée, suggérant un besoin de travail spécifique sur la mobilité ou la réactivité.</li>
-        <li><strong>Un groupe en difficulté (2) :</strong> Avec des niveaux faibles à la fois en force et en agilité, indiquant un besoin d’amélioration globale sur ces critères.</li>
+        <li><strong>A performing group (0):</strong> Combining strength and agility, ideal for activities requiring both qualities. </li>
+        <li><strong>An unbalanced group (1):</strong> Exhibiting proper strength, but limited agility, suggesting a need for specific work on mobility or responsiveness. </li>
+        <li><strong>A struggling group (2):</strong> With low levels in both strength and agility, indicating a need for overall improvement on these criteria. </li>
       </ul>
       <p>
-        Ce clustering met en évidence une <strong>discrimination claire entre les individus</strong> selon leur niveau de force et d’agilité, révélant des profils physiques distincts. 
-        Ces résultats pourraient être utilisés pour <strong>personnaliser les programmes d’entraînement</strong>, en ciblant spécifiquement les faiblesses de chaque groupe, ou pour <strong>orienter les individus vers des rôles ou des activités adaptés à leurs compétences dominantes.</strong> 
+        This clustering highlights a <strong>clear discrimination between individuals</strong> according to their level of strength and agility, revealing distinct physical profiles. 
+        These results could be used to <strong>customize training programs</strong>, specifically targeting the weaknesses of each group, or to <strong>orient individuals towards roles or activities tailored to their dominant skills. </strong> 
       </p><br>
 
-      <h3>Mais pourquoi K-Means ?</h3>
+      <h3>But why K-Means? </h3>
       <p>
-        Ici, KMeans constitue un compromis idéal entre simplicité, rapidité et clarté de l’interprétation. Les alternatives (GMM ou DBSCAN) auraient apporté une flexibilité marginale, mais au prix d’une complexité et d’un temps de calcul plus élevés, sans bénéfice notable pour nos analyses.
-        En effet, un clustering par GMM a été réalisé mais aucune différence notable entre les résultats de KMeans et de GMM n'a été relevée, si ce n'est le temps de calcul, légèrement plus faible pour KMeans.
+        Here, KMeans is an ideal compromise between simplicity, speed and clarity of interpretation. The alternatives (GMM or DBSCAN) would have provided marginal flexibility, but at the cost of higher complexity and calculation time, without any significant benefit for our analyses.
+        Indeed, a clustering by GMM was carried out but no notable difference between the results of KMeans and GMM was noted, except for the calculation time, slightly lower for KMeans.
       </p><br>
 
       <h3>Conclusion cluster</h3>
       <p>
-        Ce clustering permet d’<strong>identifier des profils types</strong> parmi les individus en fonction de leurs compétences physiques (force, agilité, coordination œil-main et durabilité), offrant ainsi une <strong>base objective pour personnaliser les entraînements, adapter les stratégies ou optimiser les performances</strong> selon les forces et faiblesses de chaque groupe.
+        This clustering allows to<strong>identify typical profiles</strong> among individuals based on their physical skills (strength, agility, hand-eye coordination, and durability), thus offering an objective <strong>basis for customizing workouts, adapt strategies or optimize performance</strong> according to the strengths and weaknesses of each group.
       </p>
     </section>
 
 
-    <!-- Régression -->
+    <!-- Regression -->
     <section id="regression" class="card">
-      <h2>Régression linéaire</h2>
+      <h2>Linear regression</h2>
       <p>
-        Nous avons construit un modèle de régression linéaire pour prédire les aptitudes nécessaires en fonction d'une variable dépendante Y. Les paramètres Y et X peuvent être choisis librement parmis les 10 disponibles, mais vocici un exemple d'interprétation.
+        We have built a linear regression model to predict the necessary skills based on a dependent variable Y. The parameters Y and X can be freely chosen from the 10 available, but here is an example of interpretation.
       </p><br>
 
-      <h3>Prédiction de la vitesse en fonction de l’agilité (Régression linéaire)</h3>
+      <h3>Speed prediction as a function of agility (Linear regression)</h3>
       <p>
-        On obtient une droite de régression linéaire positive lorsque Agility (X) augmente, la variable Speed (Y) augmente également.
-        Pour rappel, la régression linéaire est une méthode qui permet de modéliser la relation entre une variable indépendante, ici l'agilité, et une variable dépendante, ici la vitesse, en traçant une droite qui prédit la valeur de cette vitesse à partir de l'agilité.
-        Dans notre cas, la pente positive de la droite signifie que plus un individu est agile, plus sa vitesse est élevée, selon le modèle. Cela montre une relation proportionnelle entre les 2 variables qu'on peut utiliser pour estimer la vitesse d’un individu à partir de son niveau d’agilité, même pour de nouvelles valeurs.
+        We obtain a positive linear regression line when Agility (X) increases, the Speed variable (Y) also increases.
+        As a reminder, linear regression is a method that allows to model the relationship between an independent variable, here agility, and a dependent variable, here speed, by drawing a line that predicts the value of this speed from agility.
+        In our case, the positive slope of the line means that the more agile an individual is, the higher their speed is, depending on the model. This shows a proportional relationship between the 2 variables that can be used to estimate an individual’s speed from their level of agility, even for new values.
       </p>
     </section>
 
 
     <!-- Conclusion -->
     <section id="conclusion" class="card">
-      <h2>Conclusion et perspectives</h2>
+      <h2>Conclusion and outlook</h2>
       <p>
-        L’analyse des aptitudes sportives révèle une structure complexe, multidimensionnelle et hiérarchisée.
-        Néanmois, trois catégories rincipales de sports ressortent : les sports physiques, techniques et mixtes.
+        The analysis of sports skills reveals a complex, multidimensional and hierarchical structure.
+        Nevertheless, three basic categories of sports stand out: physical, technical and mixed sports.
       </p>
       <p>
-        De cette façon , on s'est vite rendu compte que les compétences les plus déterminantes sont la <strong>force</strong>, la <strong>puissance</strong>, l'<strong>agilité</strong> et la
-        <strong>vitesse</strong>, mais la stratégie et la coordination jouent un rôle clé dans certains sports spécifiques.
+        In this way, it was quickly realized that the most determining skills are <strong>strength</strong>,  <strong>power</strong>, <strong>agility</strong> and the
+        <strong>speed</strong>, but strategy and coordination play a key role in some specific sports.
       </p>
       <p>
-        → Pistes futures :
+        Future avenues:
         <ul class="bullets">
-          <li>Étendre l’analyse à plus de sports (natation, escalade, e-sport)</li>
-          <li>Utiliser des modèles non linéaires (Random Forest, SVM)</li>
-          <li>Augmenter le nombre de paramètre, comme ajouter le temps d'entrainement, l'IMC ou encore la "catégorie" du sportif (débutant, amateur, compétiteur, etc) </li>
+          <li>Extend the analysis to more sports (swimming, climbing, e-sport)</li>
+          <li>Use nonlinear models (Random Forest, SVM)</li>
+          <li>Increase the number of parameters, such as adding training time, BMI or even the "category" of the athlete (beginner, amateur, competitor, etc) </li>
         </ul>
       </p>
     </section>
 
   </main>
-
 </body>
 </html>
